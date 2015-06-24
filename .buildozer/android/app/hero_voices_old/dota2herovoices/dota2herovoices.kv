@@ -1,0 +1,286 @@
+#:kivy 1.8
+
+<MainUI>:
+    name: 'Dota2HeroVoices'
+    fullscreen: True
+    AnchorLayout
+        size_hint_y: None
+        height: root.height if root.fullscreen else max(root.height,content.height)
+        width: root.width
+        #Accordion:
+        #    orientation: 'vertical'
+        #    fullscreen: True
+        #    AccordionItem:
+        #        title: 'Radiant Strength'
+        #        id: aci1
+        Carousel:
+            direction: 'right'
+            Accordion:
+                orientation: 'vertical'
+                fullscreen: True
+                AccordionItem:
+                    title: 'Radiant Strength'
+                    id: aci1
+                    background_normal: 'images/24px-Icon_Str.png'
+                    background_selected: 'images/24px-Icon_Str.png'
+                    ScrollView:
+                        size_hint: 1, 1.8
+                        pos_hint: {'center_x':0.5, 'center_y':0.1}
+                        do_scroll_x: False
+                        scroll_timeout: 80
+                        StackLayout:
+                            id: stlay_ras
+                            orientation: 'lr-tb'
+                            size_hint: 1, 1.5
+                            spacing: 15
+                            padding: 15
+            Accordion:
+                orientation: 'vertical'
+                fullscreen: True
+                AccordionItem:
+                    title: 'Radiant Agility'
+                    background_normal: 'images/24px-Icon_Agi.png'
+                    background_selected: 'images/24px-Icon_Agi.png'
+                    id: aci2
+                    ScrollView:
+                        size_hint: 1, 1.8
+                        pos_hint: {'center_x':0.5, 'center_y':0.1}
+                        do_scroll_x: False
+                        scroll_timeout: 80
+                        StackLayout:
+                            id: stlay_raa
+                            orientation: 'lr-tb'
+                            size_hint: 1, 1.2
+                            spacing: 15
+                            padding: 15
+            Accordion:
+                orientation: 'vertical'
+                fullscreen: True
+                AccordionItem:
+                    title: 'Radiant Intelligence'
+                    background_normal: 'images/24px-Icon_Int.png'
+                    background_selected: 'images/24px-Icon_Int.png'
+                    id: aci3
+                    ScrollView:
+                        size_hint: 1, 1.8
+                        pos_hint: {'center_x':0.5, 'center_y':0.1}
+                        do_scroll_x: False
+                        scroll_timeout: 80
+                        StackLayout:
+                            id: stlay_rai
+                            orientation: 'lr-tb'
+                            size_hint: 1, 1.2
+                            spacing: 15
+                            padding: 15
+            Accordion:
+                orientation: 'vertical'
+                fullscreen: True
+                AccordionItem:
+                    title: 'Dire Strength'
+                    background_normal: 'images/24px-Icon_Str.png'
+                    background_selected: 'images/24px-Icon_Str.png'
+                    id: aci4
+                    ScrollView:
+                        size_hint: 1, 1.8
+                        pos_hint: {'center_x':0.5, 'center_y':0.1}
+                        do_scroll_x: False
+                        scroll_timeout: 80
+                        StackLayout:
+                            id: stlay_dis
+                            orientation: 'lr-tb'
+                            size_hint: 1, 1.2
+                            spacing: 15
+                            padding: 15
+            Accordion:
+                orientation: 'vertical'
+                fullscreen: True
+                AccordionItem:
+                    title: 'Dire Agility'
+                    background_normal: 'images/24px-Icon_Agi.png'
+                    background_selected: 'images/24px-Icon_Agi.png'
+                    id: aci5
+                    ScrollView:
+                        size_hint: 1, 1.8
+                        pos_hint: {'center_x':0.5, 'center_y':0.1}
+                        do_scroll_x: False
+                        scroll_timeout: 80
+                        StackLayout:
+                            id: stlay_dia
+                            orientation: 'lr-tb'
+                            size_hint: 1, 1.2
+                            spacing: 15
+                            padding: 15
+            Accordion:
+                orientation: 'vertical'
+                fullscreen: True
+                AccordionItem:
+                    title: 'Dire Intelligence'
+                    background_normal: 'images/24px-Icon_Int.png'
+                    background_selected: 'images/24px-Icon_Int.png'
+                    id: aci6
+                    ScrollView:
+                        size_hint: 1, 1.8
+                        pos_hint: {'center_x':0.5, 'center_y':0.1}
+                        do_scroll_x: False
+                        scroll_timeout: 80
+                        StackLayout:
+                            id: stlay_dii
+                            orientation: 'lr-tb'
+                            size_hint: 1, 1.2
+                            spacing: 15
+                            padding: 15
+
+
+                        #Button:
+                        #    size_hint: None, None
+                        #    height:  root.ysize
+                        #    width: root.xsize
+                        #    background_normal: 'images/Earthshaker.png'
+                        #    text_size: None, self.height
+                        #    vlign: 'bottom'
+                        #    text: 'Earthshaker'
+                        #    on_press: root.button_press(self.text)
+                        #Button:
+                        #    height:  root.ysize
+                        #    width: root.xsize
+                        #    size_hint: None, None
+                        #    background_normal: 'images/Sven.png'
+                        #    text_size: None, self.height
+                        #    vlign: 'bottom'
+                        #    text: 'Sven'
+                        #    on_press: root.button_press(self.text)
+                        #Button:
+                            #height:  root.ysize
+                            #width: root.xsize
+                            #size_hint: None, None
+                            #background_normal: 'images/Tiny.png'
+                            ##text: 'Tiny'
+                        #Button:
+                            #height:  root.ysize
+                            #width: root.xsize
+                            #size_hint: None, None
+                            #background_normal: 'images/Kunkka.png'
+                            ##text: 'Kunkka'
+                        #Button:
+                            #height:  root.ysize
+                            #width: root.xsize
+                            #size_hint: None, None
+                            #background_normal: 'images/Beastmaster.png'
+                        #Button:
+                            #height:  root.ysize
+                            #width: root.xsize
+                            #size_hint: None, None
+                            #background_normal: 'images/Dragon_Knight.png'
+                        #Button:
+                            #height:  root.ysize
+                            #width: root.xsize
+                            #size_hint: None, None
+                            #background_normal: 'images/Clockwerk.png'
+                        #Button:
+                            #height:  root.ysize
+                            #width: root.xsize
+                            #size_hint: None, None
+                            #background_normal: 'images/Omniknight.png'
+                        #Button:
+                            #height:  root.ysize
+                            #width: root.xsize
+                            #size_hint: None, None
+                            #background_normal: 'images/Huskar.png'
+                        #Button:
+                            #height:  root.ysize
+                            #width: root.xsize
+                            #size_hint: None, None
+                            #background_normal: 'images/Alchemist.png'
+                        #Button:
+                            #height:  root.ysize
+                            #width: root.xsize
+                            #size_hint: None, None
+                            #background_normal: 'images/Brewmaster.png'
+                        #Button:
+                            #height:  root.ysize
+                            #width: root.xsize
+                            #size_hint: None, None
+                            #background_normal: 'images/Treant_Protector.png'
+                        #Button:
+                            #height:  root.ysize
+                            #width: root.xsize
+                            #size_hint: None, None
+                            #background_normal: 'images/Io.png'
+                        #Button:
+                            #height:  root.ysize
+                            #width: root.xsize
+                            #size_hint: None, None
+                            #background_normal: 'images/Centaur_Warrunner.png'
+                        #Button:
+                            #height:  root.ysize
+                            #width: root.xsize
+                            #size_hint: None, None
+                            #background_normal: 'images/Timbersaw.png'
+                        #Button:
+                            #height:  root.ysize
+                            #width: root.xsize
+                            #size_hint: None, None
+                            #background_normal: 'images/Bristleback.png'
+                        #Button:
+                            #height:  root.ysize
+                            #width: root.xsize
+                            #size_hint: None, None
+                            #background_normal: 'images/Tusk.png'
+                        #Button:
+                            #height:  root.ysize
+                            #width: root.xsize
+                            #size_hint: None, None
+                            #background_normal: 'images/Elder_Titan.png'
+                        #Button:
+                            #height:  root.ysize
+                            #width: root.xsize
+                            #size_hint: None, None
+                            #background_normal: 'images/Legion_Commander.png'
+                        #Button:
+                            #height:  root.ysize
+                            #width: root.xsize
+                            #size_hint: None, None
+                            #background_normal: 'images/Earth_Spirit.png'
+                        #Button:
+                            #height:  root.ysize
+                            #width: root.xsize
+                            #size_hint: None, None
+                            #background_normal: 'images/Phoenix.png'
+
+            #AccordionItem:
+            #    title: 'Radiant Agility'
+            #    StackLayout:
+            #        orientation: 'lr-tb'
+            #        Label:
+            #            text: 'heroes here'
+            #            text_size: self.width, None
+            #AccordionItem:
+            #    title: 'Radiant Intelligence'
+            #    StackLayout:
+            #        orientation: 'lr-tb'
+            #        Label:
+            #            text: 'heroes here'
+            #            text_size: self.width, None
+            #AccordionItem:
+            #    title: 'Dire Strength'
+            #    StackLayout:
+            #        oriantation: 'lr-tb'
+            #        Label:
+            #            text: 'heroes here'
+            #            text_size: self.width, None
+            #AccordionItem:
+            #    title: 'Dire Agility'
+            #    StackLayout:
+            #        oriantation: 'lr-tb'
+            #        Label:
+            #            text: 'heroes here'
+            #            text_size: self.width, None
+            #AccordionItem:
+               # title: 'Dire Intelligence'
+               # StackLayout:
+               #     oriantation: 'lr-tb'
+               #     Label:
+               #         text: 'heroes here'
+               #         text_size: self.width, None
+
+

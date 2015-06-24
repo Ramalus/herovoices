@@ -1,0 +1,40 @@
+#:import Window kivy.core.window.Window
+<HeroVoicesWidget>:
+    Image:
+        source: 'images/logo_herovoices.png'
+        height: blayout.height
+        width: blayout.width
+        BoxLayout:
+            id: blayout
+            orientation: 'vertical'
+            spacing: 10
+            padding: 15
+            width: root.width
+            height: root.height
+
+            TextInput:
+                id: tInput
+                text: 'Search hero'
+                size_hint: (1, 0.065)
+                background_color: (1, 1, 1, 0.5)
+                foreground_color: (1, 1, 1, 1)
+                padding: [6,6,6,5]
+                opacity: 0.8
+            ScrollView:
+                id: sview
+                # size: root.size
+                # size_hint: (1, 1)
+                GridLayout:
+                    id: glayout
+                    cols: 3
+                    height: Window.height
+                    spacing: 10
+                    size_hint_x: 1
+                    size_hint_y: None
+            ProgressBar:
+                id: pbar
+                max: 0
+                size_hint_x: None
+                size_hint_y: 0.05
+                #height: 5
+                width: Window.width
