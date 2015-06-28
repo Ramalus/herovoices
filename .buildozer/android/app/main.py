@@ -12,16 +12,25 @@ if platform != 'android':
 else:
     from jnius import autoclass
     from time import sleep
+    PythonActivity=autoclass("org.renpy.android.PythonActivity")
+    AdBuddiz=autoclass("com.purplebrain.adbuddiz.sdk.AdBuddiz") 
+    AdBuddiz.setPublisherKey("d88950e5-bb9b-415e-b4a8-2a03ab798c82")
+    AdBuddiz.cacheAds(PythonActivity.mActivity)
+
 
 import random
 import hero_voices
 
-__version__ = '0.8'
+__version__ = '0.9'
+
+def show_ad():
+    app.called=True
+    AdBuddiz.showAd(PythonActivity.mActivity)
 
 class HeroVoicesWidget(Widget):
     hero_names_rads=['Earthshaker','Sven','Tiny','Kunkka','Beastmaster','Dragon_Knight','Clockwerk','Omniknight','Huskar','Alchemist','Brewmaster','Treant_Protector','Io','Centaur_Warrunner','Timbersaw','Bristleback','Tusk','Elder_Titan','Legion_Commander','Earth_Spirit','Phoenix']
     hero_names_rada=['Anti-Mage', 'Drow_Ranger','Juggernaut','Mirana','Morphling','Phantom_Lancer', 'Vengeful_Spirit','Riki','Sniper','Templar_Assassin','Luna','Bounty_Hunter','Ursa','Gyrocopter','Lone_Druid','Naga_Siren','Troll_Warlord','Ember_Spirit']
-    hero_names_radi=['Crystal_Maiden','Puck','Tinker','Windranger','Zeus','Storm_Spirit','Lina','Shadow_Shaman','Natures_Prophet','Enchantress','Jakiro','Chen','Silencer','Ogre_Magi','Rubick','Disruptor','Keeper_of_the_Light','Skywrath_Mage']
+    hero_names_radi=['Crystal_Maiden','Puck','Tinker','Windranger','Zeus','Storm_Spirit','Lina','Shadow_Shaman','Natures_Prophet','Enchantress','Jakiro','Chen','Silencer','Ogre_Magi','Rubick','Disruptor','Keeper_of_the_Light','Skywrath_Mage', 'Techies', 'Oracle']
     hero_names_dirs=['Axe','Pudge','Sand_King','Slardar','Tidehunter','Wraith_King','Lifestealer','Night_Stalker','Doom','Spirit_Breaker','Lycan','Chaos_Knight','Undying','Magnus','Abaddon']
     hero_names_dira=['Bloodseeker','Shadow_Fiend','Razor','Venomancer','Faceless_Void','Phantom_Assassin','Viper','Clinkz','Broodmother','Weaver','Spectre','Meepo','Nyx_Assassin','Slark','Medusa','Terrorblade']
     hero_names_diri=['Bane','Lich','Lion','Witch_Doctor','Enigma','Necrophos','Warlock','Queen_of_Pain','Death_Prophet','Pugna','Dazzle','Leshrac','Dark_Seer','Batrider','Ancient_Apparition','Invoker','Outworld_Devourer','Shadow_Demon','Visage']
@@ -55,7 +64,6 @@ class HeroVoicesWidget(Widget):
                 # height=self.height*0.10157,
                 bt = Button(text='', background_normal='images/%s.png'%hero_name,  width=Window.width/3.25, size_hint_x=None, size_hint_y=None, opacity=0.8)
                 bt.height=bt.width*0.5620
-                print(bt.width, bt.height)
                 bt.bind(on_press=lambda x, n=hero_name: self.button_press(n))
                 bt.bind(width=self.on_button_width)
                 self.buttons.append(bt)
@@ -70,6 +78,12 @@ class HeroVoicesWidget(Widget):
 
         self.ids.glayout.bind(minimum_height=self.ids.glayout.setter('height'))
 
+        if platform == 'android':
+            #Ad Network showAd
+            # print("READY TO SHOW? ", AdBuddiz.isReadyToShowAd())#showAd(PythonActivity.mActivity))
+            pass
+        self.presses = 0
+
     def track_progress(self, dt):
         pbar = self.ids['pbar']
         pos = self.sound.get_pos()
@@ -82,6 +96,8 @@ class HeroVoicesWidget(Widget):
         pbar.max = self.player.getDuration()
         pbar.value = pos
 
+
+
     def button_press(self, hero_name):
         for hero in hero_voices.voices:
             if hero_name in hero['name']:
@@ -92,6 +108,10 @@ class HeroVoicesWidget(Widget):
                         self.player.prepare()
                         self.player.start()
                         Clock.schedule_interval(self.track_progress_android, 0.1)
+                        if self.presses >= 5:
+                            show_ad()
+                            self.presses = 0
+                        self.presses += 1
                 else:
                     self.sound = SoundLoader.load(random.choice(hero['voices']))
                     self.sound.volume=0.1
@@ -99,18 +119,39 @@ class HeroVoicesWidget(Widget):
                     Clock.schedule_interval(self.track_progress, 0.1)
 
 class HeroVoicesApp(App):
+    def __init__(self):
+        App.__init__(self)
+        self.ad_call = False
+        self.called = False
+
+    def setAdCall(self, value):
+        self.ad_call = value 
+
     def build(self):
         heroVoices = HeroVoicesWidget()
         return heroVoices
 
     def on_pause(self):
         # Here you can save data if needed
+        if self.called:
+            self.ad_call = True
+        else:
+            self.ad_call = False
         return True
 
     def on_resume(self):
         # Here you can check if any data needs replacing (usually nothing)
-        pass 
+        if not self.ad_call:
+            show_ad()
+        else:
+            self.ad_call = False
+            self.called = False
+            pass
+        # if not ad_call:
+        #     show_ad()
+        # pass
 
 if __name__ == '__main__':
     # Window.fullscreen = True
-    HeroVoicesApp().run()
+    app = HeroVoicesApp()
+    app.run()

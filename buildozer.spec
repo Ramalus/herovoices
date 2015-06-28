@@ -1,10 +1,10 @@
 [app]
 
 # (str) Title of your application
-title = Hero Voices
+title = Hero Voices for Dota 2
 
 # (str) Package name
-package.name = com.herovoices
+package.name = herovoices
 
 # (str) Package domain (needed for android/ios packaging)
 package.domain = com.ramalus
@@ -34,7 +34,6 @@ version.filename = %(source.dir)s/main.py
 # (list) Application requirements
 # comma seperated e.g. requirements = sqlite3,kivy
 requirements = kivy 
-#pyjnius
 
 # (str) Custom source folders for requirements
 # Sets custom source for any requirements with recipes
